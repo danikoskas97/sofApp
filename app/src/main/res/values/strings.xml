@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">sofAPP</string>
+    <string name="text_find_all_possibilities" />
+    <string name="text_id_language" />
+    <string name="help_text" />
+    <string name="language_id_error" />
+    <string name="identify_most_likely_language">identify most likely language</string>
+</resources>

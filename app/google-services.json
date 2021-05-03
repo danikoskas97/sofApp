@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "866521299049",
+    "project_id": "ml-ariel-5646a",
+    "storage_bucket": "ml-ariel-5646a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866521299049:android:f593d9792143360aea4af8",
+        "android_client_info": {
+          "package_name": "com.example.sofapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866521299049-hv6bg20o7ss4sn6anv73kkp41648ctfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVvLDx8hYFM0aeK6Ut_8ThnjvyhJ1TFlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "866521299049-hv6bg20o7ss4sn6anv73kkp41648ctfa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
