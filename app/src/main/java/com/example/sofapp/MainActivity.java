@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+
     private TextView outputText;
     private static final String TAG = "MainActivity";
     private LanguageIdentifier languageIdentification;
@@ -52,36 +53,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_langid_main);
 
         final TextInputEditText inputText = findViewById(R.id.inputText);
-        Button idLanguageButton = findViewById(R.id.buttonIdLanguage);
-        Button findAllButton = findViewById(R.id.buttonIdAll);
+        Button idLanguageBtn = findViewById(R.id.buttonIdLanguage);
+        Button findAllBtn = findViewById(R.id.buttonIdAll);
         outputText = findViewById(R.id.outputText);
 
         languageIdentification = LanguageIdentification.getClient();
-        // Any new instances of LanguageIdentification needs to be closed appropriately.
-        // LanguageIdentification automatically calls close() on the ON_DESTROY lifecycle event,
-        // so here we can add our languageIdentification instance as a LifecycleObserver for this
-        // activity and have it be closed when this activity is destroyed.
         getLifecycle().addObserver(languageIdentification);
 
-        idLanguageButton.setOnClickListener(new View.OnClickListener() {
+        idLanguageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String input = inputText.getText().toString();
-                if (input.isEmpty()) {
+                if (input.isEmpty())
                     return;
-                }
                 inputText.getText().clear();
                 identifyLanguage(input);
             }
         });
 
-        findAllButton.setOnClickListener(new View.OnClickListener() {
+        findAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String input = inputText.getText().toString();
-                if (input.isEmpty()) {
+                if (input.isEmpty())
                     return;
-                }
                 inputText.getText().clear();
                 identifyPossibleLanguages(input);
             }
@@ -90,44 +85,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void identifyPossibleLanguages(final String inputText) {
         languageIdentification = LanguageIdentification.getClient();
-        languageIdentification
-                .identifyPossibleLanguages(inputText)
-                .addOnSuccessListener(
-                        this,
-                        new OnSuccessListener<List<IdentifiedLanguage>>() {
-                            @Override
-                            public void onSuccess(List<IdentifiedLanguage> identifiedLanguages) {
-                                List<String> detectedLanguages =
-                                        new ArrayList<>(identifiedLanguages.size());
-                                for (IdentifiedLanguage language : identifiedLanguages) {
-                                    detectedLanguages.add(
-                                            String.format(
-                                                    Locale.US,
-                                                    "%s (%3f)",
-                                                    language.getLanguageTag(),
-                                                    language.getConfidence())
-                                    );
-                                }
-                                outputText.append(
-                                        String.format(
-                                                Locale.US,
-                                                "\n%s - [%s]",
-                                                inputText,
-                                                TextUtils.join(", ", detectedLanguages)));
-                            }
-                        })
-                .addOnFailureListener(
-                        this,
-                        new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e(TAG, "Language identification error", e);
-                                Toast.makeText(
-                                        MainActivity.this, R.string.language_id_error,
-                                        Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
+        languageIdentification.identifyPossibleLanguages(inputText).addOnSuccessListener(this,
+                new OnSuccessListener<List<IdentifiedLanguage>>() {
+                    @Override
+                    public void onSuccess(List<IdentifiedLanguage> identifiedLanguages) {
+                        List<String> detectedLanguages =
+                                new ArrayList<>(identifiedLanguages.size());
+                        for (IdentifiedLanguage language : identifiedLanguages) {
+                            detectedLanguages.add(
+                                    String.format(
+                                            Locale.US,
+                                            "%s (%3f)",
+                                            language.getLanguageTag(),
+                                            language.getConfidence())
+                            );
+                        }
+                        outputText.append(String.format(Locale.US, "\n%s - [%s]",
+                                inputText, TextUtils.join(", ", detectedLanguages)));
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Language identification error", e);
+                        Toast.makeText(MainActivity.this, R.string.language_id_error, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void identifyLanguage(final String inputText) {
@@ -142,21 +125,16 @@ public class MainActivity extends AppCompatActivity {
                                         String.format(
                                                 Locale.US,
                                                 "\n%s - %s",
-                                                inputText,
-                                                s));
+                                                inputText, s));
                             }
                         })
-                .addOnFailureListener(
-                        this,
-                        new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e(TAG, "Language identification error", e);
-                                Toast.makeText(
-                                        MainActivity.this, R.string.language_id_error,
-                                        Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Language identification error", e);
+                        Toast.makeText(MainActivity.this, R.string.language_id_error,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
