@@ -21,6 +21,7 @@
             android:id="@+id/inputText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:backgroundTint="#CCBC97"
             android:gravity="top"
             android:hint="@string/help_text" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:background="#2196F3"
+        android:background="#0088F4"
         android:text="@string/identify_most_likely_language"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -53,11 +54,10 @@
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:background="@android:color/holo_blue_bright"
-        android:text="find all possibilities"
+        android:text="@string/text_find_all_possibilities"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/guideline"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonIdLanguage"
         app:layout_constraintTop_toTopOf="@id/buttonIdLanguage" />
